@@ -61,19 +61,19 @@ class myRequest {
     })
   }
 
-  private get<T = any>(config: myRequestConfig<T>) {
+  public get<T = any>(config: myRequestConfig<T>) {
     return this.request({ ...config, method: 'GET' })
   }
 
-  private post<T = any>(config: myRequestConfig<T>) {
+  public post<T = any>(config: myRequestConfig<T>) {
     return this.request({ ...config, method: 'POST' })
   }
 
-  private delete<T = any>(config: myRequestConfig<T>) {
+  public delete<T = any>(config: myRequestConfig<T>) {
     return this.request({ ...config, method: 'DELETE' })
   }
 
-  private patch<T = any>(config: myRequestConfig<T>) {
+  public patch<T = any>(config: myRequestConfig<T>) {
     return this.request({ ...config, method: 'PATCH ' })
   }
 }
