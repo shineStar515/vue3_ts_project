@@ -23,10 +23,11 @@ import type { FormRules, ElForm } from 'element-plus'
 import { ref, reactive, defineExpose } from 'vue'
 import { ElMessage } from 'element-plus'
 import useLoinStore from '@/stores/login'
+import { localCache } from '@/utils/cache'
 /* data */
 const formLabelAccount = reactive({
-  accountValue: '',
-  accountPwd: ''
+  accountValue: localCache.get('name') ?? '',
+  accountPwd: localCache.get('password') ?? ''
 })
 /* 校验规则 */
 const accountRules: FormRules = {
@@ -52,12 +53,20 @@ const accountRules: FormRules = {
 const formRef = ref<InstanceType<typeof ElForm>>()
 const loginStore = useLoinStore()
 
-function accountLoginAction() {
+function accountLoginAction(isRememberPwd: boolean) {
   formRef.value?.validate((valid) => {
     if (valid) {
       const name = formLabelAccount.accountValue
       const password = formLabelAccount.accountPwd
-      loginStore.loginAccountAction({ name, password })
+      loginStore.loginAccountAction({ name, password }).then(() => {
+        if (isRememberPwd) {
+          localCache.set('name', name)
+          localCache.set('password', password)
+        } else {
+          localCache.remove('name')
+          localCache.remove('password')
+        }
+      })
     } else {
       ElMessage({
         showClose: true,

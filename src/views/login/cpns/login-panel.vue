@@ -53,9 +53,15 @@
 <script setup lang="ts">
 import PanelAccount from '@/views/login/cpns/panel-account.vue'
 import PanelPhone from '@/views/login/cpns/panel-phone.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { localCache } from '@/utils/cache'
 /* data */
-const isRememberPwd = ref(false)
+const isRememberPwd = ref<boolean>(
+  Boolean(localCache.get('isRememberPwd')) ?? false
+)
+watch(isRememberPwd, (newValue) => {
+  localCache.set('isRememberPwd', newValue)
+})
 const activeName = ref('account')
 const accountRef = ref<any>()
 const phoneRef = ref<any>()
@@ -63,7 +69,7 @@ const phoneRef = ref<any>()
 /* 登录 */
 function handleLoginClick() {
   if (activeName.value === 'account') {
-    accountRef.value?.accountLoginAction()
+    accountRef.value?.accountLoginAction(isRememberPwd.value)
   } else {
     phoneRef.value?.accountLoginAction()
   }

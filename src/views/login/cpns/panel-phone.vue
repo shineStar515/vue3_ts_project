@@ -10,7 +10,15 @@
         <el-input v-model="formLabelPhone.phoneValue" />
       </el-form-item>
       <el-form-item label="验证码:" required prop="phoneCode">
-        <el-input v-model="formLabelPhone.phoneCode" />
+        <div class="form-group">
+          <el-input v-model="formLabelPhone.phoneCode" />
+          <el-button
+            class="phone-btn"
+            type="primary"
+            style="width: 80px; height: 38px"
+          >获取验证码
+          </el-button>
+        </div>
       </el-form-item>
     </el-form>
   </div>
@@ -46,4 +54,13 @@ defineExpose({
   phoneLoginAction
 })
 </script>
-<style scoped></style>
+<style scoped lang="less ">
+.form-group {
+  display: flex;
+  align-items: center;
+
+  .phone-btn {
+    margin-left: 6px;
+  }
+}
+</style>
