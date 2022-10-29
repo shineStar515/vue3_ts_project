@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { localCache } from '@/utils/cache'
+import { firstRoute } from '@/utils/mapRoutesFn'
 
 const routes = [
   { path: '/', redirect: '/main' },
@@ -27,6 +28,9 @@ router.beforeEach((to) => {
   const value = localCache.get('token')
   if (to.path != '/login' && !value) {
     return '/login'
+  }
+  if (to.path === '/main') {
+    return firstRoute?.url
   }
 })
 export default router

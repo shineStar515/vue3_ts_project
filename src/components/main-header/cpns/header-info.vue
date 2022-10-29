@@ -21,7 +21,6 @@
         <span class="el-dropdown-link">
           <div class="avatar">
             <el-avatar
-              size="10"
               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
             />
           </div>

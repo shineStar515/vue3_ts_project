@@ -12,7 +12,7 @@
           <!--    header    -->
           <main-header @expandChange="handleExpandChange" />
         </el-header>
-        <el-main style="padding: 0; margin: 0">
+        <el-main style="border-radius: 15px">
           <!--    router    -->
           <router-view />
         </el-main>

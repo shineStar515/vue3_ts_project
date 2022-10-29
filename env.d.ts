@@ -5,3 +5,4 @@ declare module '*.vue' {
   const component = defineComponent
   export default component
 }
+declare module '*.mjs'

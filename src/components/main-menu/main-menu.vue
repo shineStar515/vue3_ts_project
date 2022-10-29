@@ -8,14 +8,12 @@
     <!--    menu  -->
     <div class="menu">
       <el-menu
-        default-active="3"
+        :default-active="defaultActive"
         class="el-menu"
         text-color="#b7bdc3"
         active-text-color="#fff"
         background-color="#001529"
         :collapse="isExpandChange"
-        @open="handleOpen"
-        @close="handleClose"
       >
         <template v-for="item in userMenu" :key="item.id">
           <el-sub-menu class="el-sub-menu" :index="item.id + ''">
@@ -40,8 +38,9 @@
 </template>
 <script setup lang="ts">
 import useLoinStore from '@/stores/login'
-import { defineProps } from 'vue'
-import { useRouter } from 'vue-router'
+import { defineProps, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { firstRoute, mapPathToRoute } from '@/utils/mapRoutesFn'
 
 defineProps({
   isExpandChange: {
@@ -49,11 +48,15 @@ defineProps({
     default: false
   }
 })
-
+//默认菜单
 const loginStore = useLoinStore()
 const userMenu = loginStore.userMenu
-const router = useRouter()
+const defaultActive = ref(firstRoute.id + '')
+const route = useRoute()
+const value = mapPathToRoute(route.path, userMenu as any)
+defaultActive.value = value.id + ''
 
+//菜单跳转
 interface IChildMenu {
   children: any[]
   id: number
@@ -63,6 +66,8 @@ interface IChildMenu {
   type: number
   url: string
 }
+
+const router = useRouter()
 
 function handleMenuClick(child: IChildMenu) {
   router.push(child.url)
@@ -111,8 +116,8 @@ function handleMenuClick(child: IChildMenu) {
           background-color: #0e3051;
         }
 
-        .el-menu-item.active {
-          background-color: skyblue;
+        .el-menu-item.is-active {
+          background-color: #334fae;
         }
       }
     }
