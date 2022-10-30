@@ -1,15 +1,20 @@
 <template>
   <div class="user">
-    <h2>用户管理</h2>
-    <search-form />
-    <table-form />
+    <page-search
+      :search-form-config="searchFormConfig"
+      @queryBtnClick="handelQueryClick"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import SearchForm from '@/views/main/system/user/cpns/search-form.vue'
-import TableForm from '@/views/main/system/user/cpns/table-form.vue'
 import useSystemStore from '@/stores/main/system'
+import PageSearch from '@/base-ui/page-search/page-search.vue'
+import { searchFormConfig } from './config/pageSearch.config'
+
+function handelQueryClick(value: any) {
+  console.log(value)
+}
 
 const systemStore = useSystemStore()
 systemStore.postUsersListAction()

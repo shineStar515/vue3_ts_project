@@ -38,6 +38,7 @@ declare module '@vue/runtime-core' {
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
+    FromTable: typeof import('./src/components/from-table/index.vue')['default']
     HeaderBread: typeof import('./src/components/main-header/cpns/header-bread.vue')['default']
     HeaderInfo: typeof import('./src/components/main-header/cpns/header-info.vue')['default']
     MainContent: typeof import('./src/components/main-content/main-content.vue')['default']
@@ -45,5 +46,7 @@ declare module '@vue/runtime-core' {
     MainMenu: typeof import('./src/components/main-menu/main-menu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchForm: typeof import('./src/base-ui/page-search/page-search.vue')['default']
+    TableForm: typeof import('./src/base-ui/pege-content/page-content.vue')['default']
   }
 }
